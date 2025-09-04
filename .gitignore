@@ -1,0 +1,18 @@
+# Archivos de RStudio
+.Rhistory
+.RData
+.Rproj.user/
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Archivos de salida que puedes regenerar
+reports/*.html
+reports/*.pdf
+reports/*.docx
+data/processed/*.rds
+
+# Logs
+*.log
+

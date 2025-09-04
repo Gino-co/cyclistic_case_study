@@ -1,0 +1,126 @@
+---
+title: "Cyclistic Case Study - Exploratory Data Analysis"
+author: "Jorge Alberto Martinez Martinez"
+date: "2025-09-03"
+output:
+  word_document: default
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+    number_sections: true
+  pdf_document:
+    toc: true
+    toc_depth: 2
+---
+  
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+library(tidyverse)
+library(lubridate)
+library(scales)
+```
+
+## Introduction
+
+This report analyzes Cyclistic (Divvy) trip data between July 2024 and June 2025.
+
+Goal: explore usage patterns between casual riders and members to guide marketing strategies and optimize annual membership conversions.
+
+## Data loading
+
+```{r}
+df <- read_csv("../data/processed/data_clean.csv", show_col_types = FALSE)
+metrics_user <- read_csv("../data/processed/metrics_user.csv")
+metrics_dow  <- read_csv("../data/processed/metrics_by_dow.csv")
+metrics_month <- read_csv("../data/processed/metrics_by_month.csv")
+top_start <- read_csv("../data/processed/top_start_stations.csv")
+top_end   <- read_csv("../data/processed/top_end_stations.csv")
+```
+
+## Executive summary by user type
+
+```{r}
+knitr::kable(metrics_user, caption = "User type summary")
+```
+
+Observations:
+
+Members represent the majority of trips.
+
+Casual riders have higher average and median trip durations.
+
+The 95th percentile duration (duration_p95_min) shows that the longest trips are primarily by casual riders, suggesting 
+they are a key segment for promotions targeting long trips.
+
+## Trip duration distribution
+
+```{r}
+knitr::include_graphics("../data/processed/hist_duration.png")
+knitr::include_graphics("../data/processed/box_duration.png")
+```
+
+Interpretation:
+
+Histogram peaks indicate typical trip durations for each user type.
+
+Boxplot with outliers highlights variability, casual riders occasionally take much longer trips than members.
+
+## Patterns by hour and day of week
+
+```{r}
+knitr::include_graphics("../data/processed/trips_by_hour.png")
+knitr::kable(metrics_dow, caption = "Average duration per day of week and user type")
+```
+
+Insights:
+
+Weekend trips are longer on average, particularly among casual riders.
+
+Weekday usage is more consistent among members.
+
+## Usage by month
+
+```{r}
+knitr::kable(metrics_month, caption = "Average duration per month and user type")
+```
+
+Insights:
+
+Seasonality is evident: warmer months show higher trip counts.
+
+Casual rider trips peak in summer months, with higher median and average durations.
+
+## Trips by bike type
+
+```{r}
+knitr::include_graphics("../data/processed/trips_by_bike.png")
+```
+
+Observations:
+Bike type distribution can inform inventory and promotion strategies.
+
+## Top stations
+
+```{r}
+knitr::kable(top_start, caption = "Top 10 start stations")
+knitr::kable(top_end, caption = "Top 10 end stations")
+```
+
+Insights:
+Central stations are high traffic areas, important for marketing or station expansion.
+
+## Key findings
+
+- Members account for the majority of trips.
+- Casual riders tend to take longer trips, especially on weekends.
+- Strong seasonality: more trips in warmer months.
+- Outliers (>120 min) are rare and represent atypical trips.
+- Central stations concentrate the highest number of trips.
+
+## Recommendations
+
+- Target casual riders on weekends for digital campaigns promoting memberships.
+- Promote services or perks at top stations to encourage conversions.
+- Highlight membership benefits for long or frequent trips.
+- Consider seasonal promotions aligned with summer peaks.
