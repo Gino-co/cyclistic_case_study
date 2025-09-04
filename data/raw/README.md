@@ -1,6 +1,7 @@
-Este repositorio incluye solo archivos de muestra para reproducir el análisis.
+This repository contains only sample files to reproduce the analysis.
 
-Para obtener los datos completos del estudio Cyclistic:
-- Visita https://divvy-tripdata.s3.amazonaws.com/index.html
-- Descarga los CSV completos
-- Colócalos en esta carpeta `data/raw/`
+To obtain the full Cyclistic dataset:
+
+1. Visit [https://divvy-tripdata.s3.amazonaws.com/index.html](https://divvy-tripdata.s3.amazonaws.com/index.html)  
+2. Download the complete CSV files  
+3. Place them in this folder: `data/raw/`
